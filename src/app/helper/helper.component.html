@@ -6,7 +6,10 @@
     <div class="overlay left" [ngStyle]="{'height.px': height, 'width.px':left, 'top.px':top}"></div>
     <div class="overlay right" [ngStyle]="{'height.px': height, 'width.px': right, 'top.px':top}"></div>
     <div class="helpcontainer" [ngStyle]="{'top.px':top+height, 'left.px':left+20}">
+        
         {{helpcontent}}
+        <button [disabled]="seq == 0" (click)="prev()">Prev</button>
         <button [disabled]="seq == helpservice.helpsequence.length-1" (click)="next()">Next</button>
+        <button (click)="cancel()">Cancel</button>
     </div>
 </div>

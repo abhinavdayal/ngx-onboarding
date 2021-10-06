@@ -22,7 +22,7 @@ export class HelperComponent implements OnInit {
   
   @HostListener('window:resize', ['$event'])
   handleResize(event: any) {
-    if(this.helpon) this.nexthelp();
+    if(this.helpon) this.showCurrentHelp();
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -47,10 +47,10 @@ export class HelperComponent implements OnInit {
     this.helpon = true;
     this.scrollx = window.pageXOffset || document.documentElement.scrollLeft;
     this.scrolly = window.pageYOffset || document.documentElement.scrollTop;
-    this.nexthelp();
+    this.showCurrentHelp();
   }
 
-  private nexthelp() {
+  private showCurrentHelp() {
     let H = this.helpservice.helpsequence[this.seq];
     let e = H.el.nativeElement;
     //let t = e.offsetTop;
@@ -70,7 +70,17 @@ export class HelperComponent implements OnInit {
 
   next() {
     this.seq++
-    this.nexthelp();
+    this.showCurrentHelp();
+  }
+
+  prev() {
+    this.seq--;
+    this.showCurrentHelp();
+  }
+
+  cancel() {
+    this.seq = 0;
+    this.helpon = false;
   }
 
 }
