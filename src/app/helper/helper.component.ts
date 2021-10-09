@@ -53,11 +53,23 @@ export class HelperComponent implements OnInit {
   private showCurrentHelp() {
     let H = this.helpservice.helpsequence[this.seq];
     let e = H.el.nativeElement;
-    //let t = e.offsetTop;
-    // this.scrolly = e.offsetTop;
-    // this.scrollx = e.offsetLeft;
-    // window.scroll(this.scrollx, this.scrolly);
-    this.top = e.offsetTop;
+
+    let t = e.offsetTop;
+    console.log("top = ", t, "ScrollY= ", this.scrolly, "height = ", window.innerHeight)
+    if(t-this.scrolly < 0 || t-this.scrolly>window.innerHeight) {
+      this.scrolly = e.offsetTop;
+      window.scroll(this.scrollx, this.scrolly);
+    }
+    this.scrolly = window.scrollY;
+    console.log("top = ", t, "ScrollY= ", this.scrolly, "height = ", window.innerHeight)
+
+    // now based on the position, decide where to show help (top, left, bottom, right)
+
+    // if bottom > help content height, then show on bottom
+    // if top > help content height, then show on top
+    // if left > left ...
+    // if no space, may be you need to scroll further
+    this.top = e.offsetTop-this.scrolly;
     this.bottom = window.innerHeight - (this.top + e.clientHeight);
     this.left = e.offsetLeft;
     this.right = window.innerWidth - (this.left + e.clientWidth);
