@@ -1,15 +1,18 @@
-
 <button class="help" (click)="show()">Show Help</button>
 <div class="container" *ngIf="helpon">
     <div class="overlay top" [ngStyle]="{'height.px':top}"></div>
     <div class="overlay bottom" [ngStyle]="{'height.px':bottom}"></div>
     <div class="overlay left" [ngStyle]="{'height.px': height, 'width.px':left, 'top.px':top}"></div>
     <div class="overlay right" [ngStyle]="{'height.px': height, 'width.px': right, 'top.px':top}"></div>
-    <div class="helpcontainer" [ngStyle]="{'top.px':top+height, 'left.px':left+20}">
-        
-        {{helpcontent}}
-        <button [disabled]="seq == 0" (click)="prev()">Prev</button>
-        <button [disabled]="seq == helpservice.helpsequence.length-1" (click)="next()">Next</button>
-        <button (click)="cancel()">Cancel</button>
+    <div class="helpcontainer" *ngIf="!scrolling"
+        [ngStyle]="{'top.px':helptop, 'left.px':right+width>calloutWidth? left : left - calloutWidth + width, 'transform-origin': bottom>calloutHeight?'top':'bottom'}">
+        <div [ngClass]="{'pointer':true, 'bottom':bottom>calloutHeight, 'top': bottom<=calloutHeight, 'left':right+width>calloutWidth, 'right':right+width<=calloutWidth}" ></div>
+        <div class="callout">
+            <p>{{helpcontent}}</p>
+
+            <button [disabled]="seq == 0" (click)="prev()">Prev</button>
+            <button [disabled]="seq == helpservice.helpsequence.length-1" (click)="next()">Next</button>
+            <button (click)="cancel()">Cancel</button>
+        </div>
     </div>
 </div>

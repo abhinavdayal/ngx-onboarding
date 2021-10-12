@@ -1,48 +1,93 @@
 .help {
-   position: fixed;
-   top: 0;
+    position: fixed;
+    top: 0;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
 }
 
 .container {
+    padding: 20px;
     position: fixed;
     z-index: 10000000;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    overflow:hidden;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
     .overlay {
-        background-color: rgba(0,0,0,0.7);
+        background-color: rgba(0, 0, 0, 0.7);
     }
-    .top, .bottom {
+    .top,
+    .bottom {
         width: 100%;
     }
-
     .top {
         position: absolute;
-        top:0;
-        left:0;
+        top: 0;
+        left: 0;
     }
-
     .bottom {
         position: absolute;
         bottom: 0;
         left: 0;
     }
-
     .left {
         position: absolute;
-        left:0;
+        left: 0;
     }
-
     .right {
         position: absolute;
-        right:0;
+        right: 0;
     }
-
+    @keyframes zoom {
+        from {
+            transform: scaleY(0);
+        }
+        to {
+            transform: scaleY(1);
+        }
+    }
     .helpcontainer {
         position: absolute;
+        border-radius: 10px;
         background-color: white;
-    }
+        width: 250px;
+        height: 150px;
+        animation: zoom 0.2s forwards ease-in;
+        .callout {
+            padding: 10px;
+            margin: 20px;
 
+            button {
+                margin: 5px;
+            }
+        }
+        .pointer {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            transform: rotate(45deg);
+            position: absolute;
+            transform-origin: center;
+        }
+        .bottom {
+            bottom: unset;
+            top: -10px;
+        }
+        .top {
+            top: unset;
+            bottom: -10px;
+        }
+        .left {
+            right: unset;
+            left: 40px;
+        }
+        .right {
+            left: unset;
+            right: 40px;
+        }
+    }
 }
